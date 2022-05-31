@@ -119,6 +119,7 @@ const Login = () => {
           await addUserInDatabase(data.user.uid, { ...userData.user });
           return navigate("/home");
         }
+
         return navigate("/home");
       })
       .catch((err) => {

@@ -9,6 +9,8 @@ import {
   addTaskInDatabase,
   updateTaskTitleInDatabase,
   updateTaskStatusInDatabase,
+  deleteTaskInDatabase,
+  getTasksFromDatabase
 } from "./firebase";
 
 export {
@@ -22,4 +24,6 @@ export {
   updateTaskTitleInDatabase,
   updateTaskStatusInDatabase,
   createUserWithEmailPassword,
+  deleteTaskInDatabase,
+  getTasksFromDatabase
 };

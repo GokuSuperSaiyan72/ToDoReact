@@ -1,4 +1,4 @@
-import React, { useRef, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import { Layout } from "antd";
 import { useNavigate } from "react-router-dom";
 import { Profile, TodoDashboard, DashboardHeader } from "./components";
@@ -9,6 +9,8 @@ import {
   addTaskInDatabase,
   updateTaskTitleInDatabase,
   updateTaskStatusInDatabase,
+  deleteTaskInDatabase,
+  getTasksFromDatabase,
 } from "../../library";
 
 const { Header, Sider, Content } = Layout;
@@ -23,6 +25,9 @@ const Home = () => {
   const [isEditEnabled, setIsEditEnabled] = useState(false);
 
   const inputRef = useRef(null);
+  const readDatabase = getTasksFromDatabase(user.uid);
+
+  console.log(readDatabase);
 
   const onHandleChange = (name, value) => {
     switch (name) {
@@ -39,7 +44,6 @@ const Home = () => {
       onAddClickHandler();
     }
   };
-
   const onAddClickHandler = () => {
     const taskData = {
       id: tasks.length + 1,
@@ -47,6 +51,7 @@ const Home = () => {
       status: "pending",
     };
     addTaskInDatabase(user.uid, taskData);
+
     setTasks([taskData, ...tasks]);
     setNewTaskInput("");
   };
@@ -109,6 +114,7 @@ const Home = () => {
   };
 
   const deleteATask = (id) => {
+    deleteTaskInDatabase(user.uid, id);
     setTasks(tasks.filter((task) => task.id !== id));
   };
 
